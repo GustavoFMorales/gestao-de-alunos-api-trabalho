@@ -1,0 +1,119 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-09-21T11:25:13.069Z",
+    "end": "2026-09-21T11:25:13.306Z",
+    "duration": 237,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "91484dbe-ddd5-4f11-891b-d5755fc18cc3",
+      "title": "",
+      "fullFile": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Meus Projetos\\Pós-graduação em Automação de Testes de Software\\Automação API\\gestao-de-alunos-api-trabalho\\test\\external\\fluxoEntregaTrabalho.test.js",
+      "file": "\\test\\external\\fluxoEntregaTrabalho.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "040a1bca-04f5-42aa-8cfe-c0af7b4aabc3",
+          "title": "Fluxo entrega de trabalho",
+          "fullFile": "C:\\Users\\gusta\\OneDrive\\Área de Trabalho\\Meus Projetos\\Pós-graduação em Automação de Testes de Software\\Automação API\\gestao-de-alunos-api-trabalho\\test\\external\\fluxoEntregaTrabalho.test.js",
+          "file": "\\test\\external\\fluxoEntregaTrabalho.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Fluxo entrega de trabalho\"",
+              "fullTitle": "Fluxo entrega de trabalho \"before each\" hook in \"Fluxo entrega de trabalho\"",
+              "timedOut": false,
+              "duration": 85,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "tokenAdmin = await obterTokenAdmin();",
+              "err": {},
+              "uuid": "49adf3aa-3ec3-42b9-8563-ab62986d82de",
+              "parentUUID": "040a1bca-04f5-42aa-8cfe-c0af7b4aabc3",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Validar que o aluno Gustavo que acaba de ser cadastrado pode ser matriculado em uma nova disciplina",
+              "fullTitle": "Fluxo entrega de trabalho Validar que o aluno Gustavo que acaba de ser cadastrado pode ser matriculado em uma nova disciplina",
+              "timedOut": false,
+              "duration": 148,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const cadastroAlunoResponse = await api()\n  .post(\"api/admin/alunos\")\n  .set(\"Content-Type\", \"application/json\")\n  .set(\"Authorization\", `Bearer ${tokenAdmin}`)\n  .send(dados.dadosAluno);\nexpect(cadastroAlunoResponse.status).to.equal(201);\nconst alunoId = cadastroAlunoResponse.body.id;\nconst cadastroDisciplinaResponse = await api()\n  .post(\"api/admin/disciplinas\")\n  .set(\"Content-Type\", \"application/json\")\n  .set(\"Authorization\", `Bearer ${tokenAdmin}`)\n  .send(dados.dadosDisciplina);\nexpect(cadastroDisciplinaResponse.status).to.equal(201);\nconst disciplinaId = cadastroDisciplinaResponse.body.id;\nconst matriculaAlunoDisciplinaResponse = await api()\n  .post(`api/admin/disciplinas/${disciplinaId}/matriculas`)\n  .set(\"Content-Type\", \"application/json\")\n  .set(\"Authorization\", `Bearer ${tokenAdmin}`)\n  .send({\n    alunoId: alunoId,\n  });\nexpect(matriculaAlunoDisciplinaResponse.status).to.equal(201);\ntokenAluno = await obterTokenAluno()\nconst entregaTrabalhoAlunoResponse = await api()\n  .post(`api/alunos/${alunoId}/trabalhos`)\n  .set(\"Content-Type\", \"application/json\")\n  .set(\"Authorization\", `Bearer ${tokenAluno}`)\n  .send({ ...dados.dadosTrabalho, disciplinaId });\nexpect(entregaTrabalhoAlunoResponse.status).to.equal(201);",
+              "err": {},
+              "uuid": "13ba3288-694c-4cec-8960-aea6acddf64f",
+              "parentUUID": "040a1bca-04f5-42aa-8cfe-c0af7b4aabc3",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "13ba3288-694c-4cec-8960-aea6acddf64f"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 148,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.8.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "8.1.1"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}

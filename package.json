@@ -7,17 +7,19 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "mocha test/**/*.test.js --exit"
+    "test": "mocha ./test/**/*.test.js --timeout 10000 --reporter mochawesome"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "dotenv": "^18.0.1",
     "esm": "^3.2.25",
     "express": "^4.19.2",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
+    "mochawesome": "^8.1.1",
     "mongoose": "^9.9.3",
     "morgan": "^1.10.0",
     "swagger-ui-express": "^5.0.1"

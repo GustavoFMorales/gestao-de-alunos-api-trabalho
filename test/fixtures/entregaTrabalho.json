@@ -1,0 +1,20 @@
+[
+    {
+        "testTitle": "Validar que o aluno Gustavo que acaba de ser cadastrado pode ser matriculado em uma nova disciplina",
+        "dadosAluno": {
+            "nome": "Gustavo Morales",
+            "email": "gustavo.morales@pgats.com",
+            "matricula": "0508199",
+            "senha": "123456"
+        },
+        "dadosDisciplina": {
+            "nome": "Automação na camada de serviço",
+            "codigo": "PC1502",
+            "cargaHoraria": 60
+        },
+        "dadosTrabalho": {
+            "titulo": "Trabalho de Automação",
+            "descricao": "Entrega"
+        }
+    }
+]
