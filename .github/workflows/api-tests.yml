@@ -1,0 +1,40 @@
+name: API Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Rodar testes
+        run: npm test
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          EMAIL_ADMIN: ${{ secrets.EMAIL_ADMIN }}
+          SENHA_ADMIN: ${{ secrets.SENHA_ADMIN }}
+          EMAIL_ALUNO_GUSTAVO: ${{ secrets.EMAIL_ALUNO_GUSTAVO }}
+          SENHA_ALUNO_GUSTAVO: ${{ secrets.SENHA_ALUNO_GUSTAVO }}
+
+      - name: Publicar relatório Mochawesome
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: mochawesome-report/
