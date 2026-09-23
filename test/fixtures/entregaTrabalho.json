@@ -1,6 +1,6 @@
 [
     {
-        "testTitle": "Validar que o aluno Gustavo que acaba de ser cadastrado pode ser matriculado em uma nova disciplina",
+        "testTitle": "Validar que o aluno Gustavo consegue registrar a entrega de um trabalho após ser cadastrado, matriculado e logado",
         "dadosAluno": {
             "nome": "Gustavo Morales",
             "email": "gustavo.morales@pgats.com",
@@ -11,6 +11,10 @@
             "nome": "Automação na camada de serviço",
             "codigo": "PC1502",
             "cargaHoraria": 60
+        },
+        "dadosLoginAluno": {
+            "email": "gustavo.morales@pgats.com",
+            "senha": "123456"
         },
         "dadosTrabalho": {
             "titulo": "Trabalho de Automação",
