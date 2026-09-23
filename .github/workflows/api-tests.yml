@@ -10,6 +10,17 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,10 +34,24 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
+      - name: Subir a API
+        run: npm start &
+        env:
+          PORT: 3000
+          MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
+
+      - name: Aguardar a API responder
+        run: |
+          for i in {1..30}; do
+            curl -sf http://localhost:3000/api-docs > /dev/null && exit 0
+            sleep 1
+          done
+          echo "A API não subiu a tempo"; exit 1
+
       - name: Rodar testes
         run: npm test
         env:
-          BASE_URL: ${{ secrets.BASE_URL }}
+          BASE_URL: http://localhost:3000/
           EMAIL_ADMIN: ${{ secrets.EMAIL_ADMIN }}
           SENHA_ADMIN: ${{ secrets.SENHA_ADMIN }}
           EMAIL_ALUNO_GUSTAVO: ${{ secrets.EMAIL_ALUNO_GUSTAVO }}
